@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": [
+    "${mod_author}"
+  ],
+  "contact": {
+    "homepage": "https://matrix.felixhub.dev/",
+    "sources": "https://github.com/cootshk/Truesight",
+    "issues": "https://github.com/cootshk/Truesight/issues"
+  },
+  "license": "${license}",
+  "icon": "assets/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "io.github.cootshk.truesight.Truesight"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "*",
+    "java": ">=${java_version}"
+  }
+}

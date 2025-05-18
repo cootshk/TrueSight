@@ -1,0 +1,74 @@
+plugins {
+    // see https://fabricmc.net/develop/ for new versions
+//    id 'fabric-loom' version '1.7-SNAPSHOT' apply true
+    // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
+//    id 'net.neoforged.moddev' version '0.1.110' apply true
+    id 'multiloader-common'
+//    id 'net.neoforged.moddev'
+    id 'fabric-loom'
+}
+
+//neoForge {
+//    neoFormVersion = neo_form_version
+//    // Automatically enable AccessTransformers if the file exists
+//    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+//    if (at.exists()) {
+//        accessTransformers.add(at.absolutePath)
+//    }
+//    parchment {
+//        minecraftVersion = parchment_minecraft
+//        mappingsVersion = parchment_version
+//    }
+//}
+// Fabric
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        "${project.mod_id}" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    // fabric and neoforge both bundle mixinextras, so it is safe to use it in common
+    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": inputs.properties.version
+    }
+}
+
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
