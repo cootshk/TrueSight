@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "id": "${mod_id}",
-  "version": "${version}",
-  "name": "${mod_name}",
-  "description": "${description}",
+  "id": "truesight",
+  "version": "1.0.0",
+  "name": "TrueSight",
+  "description": "Render invisible entities with F3+M.",
   "authors": [
-    "${mod_author}"
+    "Cootshk"
   ],
   "contact": {
     "homepage": "https://matrix.felixhub.dev/",
     "sources": "https://github.com/cootshk/Truesight",
     "issues": "https://github.com/cootshk/Truesight/issues"
   },
-  "license": "${license}",
+  "license": "GPLv3+",
   "icon": "assets/icon.png",
   "environment": "client",
   "entrypoints": {
@@ -21,11 +21,12 @@
     ]
   },
   "mixins": [
-    "${mod_id}.mixins.json"
+    "truesight.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${fabric_loader_version}",
+    "fabricloader": ">=0.15.11",
     "minecraft": "*",
-    "java": ">=${java_version}"
-  }
+    "java": ">=21"
+  },
+  "accessWidener": "truesight.accesswidener"
 }

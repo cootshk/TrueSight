@@ -30,6 +30,7 @@ loom {
             sourceSet sourceSets.client
         }
     }
+    accessWidenerPath = file("src/client/resources/${project.mod_id}.accesswidener")
 }
 
 dependencies {
@@ -46,15 +47,6 @@ dependencies {
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
 }
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": inputs.properties.version
-    }
-}
-
 
 configurations {
     commonJava {
